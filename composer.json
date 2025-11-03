@@ -1,0 +1,20 @@
+{
+    "name": "pizzeria/frontend",
+    "description": "Frontend en PHP para Pizzería con rutas y consumo de API",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Pizzeria\\Frontend\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mathias Sejje"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "bramus/router": "^1.6",
+        "guzzlehttp/guzzle": "^7.10"
+    }
+}
