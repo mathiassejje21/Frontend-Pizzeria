@@ -1,13 +1,13 @@
 <?php
 
-class authController{
+class authController {
     private $email;
     private $password;
     private $nombre;
     private $apiAuth;
 
     public function __construct() {
-        require_once __DIR__ . '/../../services/apiAuthetication.php';
+        require_once __DIR__ . '/../services/apiAuthetication.php';
         $this->apiAuth = new apiAuthetication();
         $this->email = "";
         $this->password = "";
@@ -15,13 +15,13 @@ class authController{
     }
 
     public function showLogin() {
-        include_once __DIR__ . '/../../../public/views/trabajadores/login.php';
+        include_once __DIR__ . '/../views/login.php';
     }
 
     public function processLogin() {
         $this->email = $_POST['email'] ?? '';
         $this->password = $_POST['password'] ?? '';
-        
+
         $response = $this->apiAuth->login([
             'email' => $this->email,
             'password' => $this->password
@@ -29,35 +29,36 @@ class authController{
 
         $body = json_decode($response->getBody(), true);
 
-        if($body['mensaje']=='Login exitoso'){
+        if (isset($body['mensaje']) && $body['mensaje'] == 'Login exitoso') {
             session_start();
             $user = $this->apiAuth->profile();
             $userBody = json_decode($user->getBody(), true);
             $_SESSION['user'] = $userBody['user'];
-            if($userBody['user']['rol'] == 'administrador'){
+
+            if ($userBody['user']['rol'] == 'administrador') {
                 header('Location: /admin/dashboard');
                 exit();
-            }elseif($userBody['user']['rol'] == 'personal'){
+            } elseif ($userBody['user']['rol'] == 'personal') {
                 header('Location: /personal/dashboard');
                 exit();
-            }elseif($userBody['user']['rol'] == 'cliente'){
-                header('Location: /cliente/dashboard');
+            } elseif ($userBody['user']['rol'] == 'cliente') {
+                header('Location: /Pizzeria/dashboard');
                 exit();
-            }else{
-                echo 'hubo un error';
+            } else {
+                echo 'Error en el rol del usuario.';
             }
-        }else{
-            header('Location: /trabajadores/login');
+        } else {
+            header('Location: /');
             exit();
         }
     }
 
-    public function logout(){
+    public function logout() {
         session_start();
         $response = $this->apiAuth->logout();
         json_decode($response->getBody(), true);
         session_destroy();
-        header('Location: /trabajadores/login');
+        header('Location: /Pizzeria');
         exit();
     }
 }

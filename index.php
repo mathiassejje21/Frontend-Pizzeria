@@ -5,10 +5,12 @@ use Bramus\Router\Router;
 
 $router = new Router();
 
-$router->get('/', function() {
-    echo "Hola, bienvenido a la Pizzería!";});
+cargarRutasUsuarios($router);
 
-cargarRutasTrabajadores($router);
+$router->get('/', function() {
+    header('Location: /Pizzeria');
+    exit();
+});
 
 $router->get('/trabajadores', function() {
     header('Location: /trabajadores/login');
