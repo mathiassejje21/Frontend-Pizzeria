@@ -23,6 +23,13 @@ class apiAuthetication {
         $_SESSION['cookiejar'] = serialize($this->jar);
     }
 
+    public function register($data) {
+        $response = $this->user->post('register', [
+            'json' => $data
+        ]);
+        return $response;
+    }
+
     public function login($data) {
         $response = $this->user->post('login', [
             'json' => $data

@@ -15,9 +15,14 @@ function cargarRutasUsuarios($router) {
     cargarRutasAdmin($router);
     cargarRutasPersonal($router);
 
-    $router->get('Pizzeria/login', [$auth, 'showLogin']);
-    $router->post('Pizzeria/login', [$auth, 'processLogin']);
-    $router->get('Pizzeria/logout', [$auth, 'logout']);
+    $router->get('/pizzeria', function() {
+        echo "Bienvenido al sitio de la Pizzería!";
+    });
+    $router->get('/Pizzeria/login', [$auth, 'showLogin']);
+    $router->post('/Pizzeria/login', [$auth, 'processLogin']);
+    $router->get('/Pizzeria/register', [$auth, 'showRegister']);
+    $router->post('/Pizzeria/register', [$auth, 'processRegister']);
+    $router->get('/Pizzeria/logout', [$auth, 'logout']);
 
     cargarRutasCliente($router);
 }

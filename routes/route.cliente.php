@@ -1,10 +1,5 @@
 <?php 
-
 function cargarRutasCliente($router) {
-
-    $router->get('/Pizzeria', function() {
-        echo "Bienvenido al sitio de la Pizzería!";
-    });
 
     $router->get('/Pizzeria/dashboard', function() {
         session_start();
@@ -12,6 +7,11 @@ function cargarRutasCliente($router) {
             header('Location: /Pizzeria/login');
             exit();
         }
+        if($_SESSION['user']['rol'] !== 'cliente') {
+            header('Location: /trabajadores/login');
+            exit();
+        }
+        echo "<h1>Panel de Cliente</h1>";
         print_r($_SESSION['user']);
     });
 }
