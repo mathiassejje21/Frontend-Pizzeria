@@ -37,25 +37,22 @@ class authController {
                 $userBody = json_decode($user->getBody(), true);
                 $_SESSION['user'] = $userBody['user'];
                 
-                if ($_SERVER['REQUEST_URI'] === '/Pizzeria/login'){
+                if ($_SERVER['REQUEST_URI'] === '/pizzeria/login'){
                     if ($userBody['user']['rol'] == 'cliente') {
-                        header('Location: /Pizzeria/dashboard');
-                        exit();
+                        header('Location: /pizzeria/dashboard');
                     } else {
                         $this->logout();
-                        exit();
                     }
+                    exit();
                 } elseif ($_SERVER['REQUEST_URI'] === '/trabajadores/login') {
                     if ($userBody['user']['rol'] == 'administrador') {
                         header  ('Location: /admin/dashboard');
-                        exit();
                     } elseif ($userBody['user']['rol'] == 'personal') {
                         header('Location: /personal/dashboard');
-                        exit();
                     } else {
                         $this->logout();
-                        exit();
                     }
+                    exit();
                 }
             } elseif (isset($body['mensaje'])) {
                 $_SESSION['error'] = $body['mensaje'];
@@ -97,26 +94,24 @@ class authController {
 
             $body = json_decode($response->getBody(), true);
 
-            if (isset($body['mensaje']) && $body['mensaje'] == 'Usuario registrado correctamente') {
+            if (isset($body['mensaje'])) {
                 $_SESSION['mensaje-register'] = $body['mensaje'];
-                header('Location: /Pizzeria/register');
-                exit();
-            } elseif (isset($body['mensaje'])) {
-                $_SESSION['mensaje-register'] = $body['mensaje'];
-                header('Location: /Pizzeria/register');
-                exit();
+                header('Location: /pizzeria/register');
+            } else {
+                $_SESSION['mensaje-register'] = 'Error al Registrarse';
+                header('Location: /pizzeria/register');
             }
-
+            exit();
         } catch (\GuzzleHttp\Exception\ClientException $e) {
             $responseBody = (string) $e->getResponse()->getBody();
             $data = json_decode($responseBody, true);
             $_SESSION['mensaje-register'] = $data['mensaje'] ?? 'Error al Registrarse';
-            header('Location: /Pizzeria/register');
+            header('Location: /pizzeria/register');
             exit();
 
         } catch (\Exception $e) {
             $_SESSION['mensaje-register'] = 'Error inesperado: ' . $e->getMessage();
-            header('Location: /Pizzeria/register');
+            header('Location: /pizzeria/register');
             exit();
         }
     }
@@ -133,12 +128,10 @@ class authController {
         } elseif ($rol === 'personal' || $rol === 'administrador') {
             header('Location: /trabajadores/login');
         } else {
-            header('Location: /pizzeria');
+            header('Location: /pizzeria/logout');
         }
-
         exit();
     }
-
 
 }
 

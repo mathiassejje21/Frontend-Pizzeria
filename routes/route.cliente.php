@@ -1,10 +1,10 @@
 <?php 
 function cargarRutasCliente($router) {
 
-    $router->get('/Pizzeria/dashboard', function() {
+    $router->get('/pizzeria/dashboard', function() {
         session_start();
         if(!isset($_SESSION['user'])){
-            header('Location: /Pizzeria/login');
+            header('Location: /pizzeria/login');
             exit();
         }
         if($_SESSION['user']['rol'] !== 'cliente') {

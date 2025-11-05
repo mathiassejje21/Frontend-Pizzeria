@@ -1,7 +1,7 @@
 <?php require_once __DIR__ . '/header.php'; ?>
 <?php 
-    if ($_SERVER['REQUEST_URI'] === '/Pizzeria/login'){
-        $action = '/Pizzeria/login';
+    if ($_SERVER['REQUEST_URI'] === '/pizzeria/login'){
+        $action = '/pizzeria/login';
         $h2color = 'red';
         $btncolor = 'btn-danger';
         $bgcolor =  'rgb(254, 246, 235)';
@@ -42,10 +42,10 @@
             <button type="submit" class="btn <?= $btncolor ?>">Iniciar Sesion</button>
         </form>
 
-        <?php if ($_SERVER['REQUEST_URI'] === '/Pizzeria/login'): ?>
+        <?php if ($_SERVER['REQUEST_URI'] === '/pizzeria/login'): ?>
             <div style="margin-top: 0.5rem; text-align: center;">
                 <p style="color: #686868ff; margin-bottom: 2rem;">¿No tienes una cuenta?</p>
-                <a href="/Pizzeria/register" class="btn btn-outline-danger">Crear cuenta</a>
+                <a href="/pizzeria/register" class="btn btn-outline-danger">Crear cuenta</a>
             </div>
         <?php endif; ?>
     </div>

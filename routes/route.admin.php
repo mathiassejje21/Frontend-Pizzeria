@@ -7,7 +7,8 @@ function cargarRutasAdmin($router) {
             header('Location: /trabajadores/login');
             exit();
         }
-        if($_SESSION['user']['rol'] == 'cliente') {
+        if($_SESSION['user']['rol'] !== 'administrador') {
+            session_destroy();
             header('Location: /pizzeria/login');
             exit();
         }

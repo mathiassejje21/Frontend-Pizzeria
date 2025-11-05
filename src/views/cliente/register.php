@@ -47,7 +47,7 @@ unset($_SESSION['mensaje-register']);
                 <?= htmlspecialchars($mensaje) ?> 
             </div>
         <?php endif; ?>
-        <form class="<?= htmlspecialchars($nameClass) ?>" method="post" action="/Pizzeria/register">
+        <form class="<?= htmlspecialchars($nameClass) ?>" method="post" action="/pizzeria/register">
             <div class="mb-2">
                 <input type="text" class="form-control" name="nombre" placeholder="Juan Perez" >
             </div>
@@ -59,7 +59,7 @@ unset($_SESSION['mensaje-register']);
             </div>
             <button type="submit" class="btn btn-danger">Registrarse</button>
         </form>
-        <a href="/Pizzeria/login" style="text-decoration: none; width: 70%;" class="btn btn-success <?= htmlspecialchars($classbtn) ?>">Iniciar Sesion</a>
+        <a href="/pizzeria/login" style="text-decoration: none; width: 70%;" class="btn btn-success <?= htmlspecialchars($classbtn) ?>">Iniciar Sesion</a>
         </section>
     </div>
 </section>

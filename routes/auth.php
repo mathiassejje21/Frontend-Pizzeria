@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__ . '/../src/controllers/authController.php';
 require_once __DIR__ . '/route.personal.php';
 require_once __DIR__ . '/route.cliente.php';
@@ -16,14 +15,13 @@ function cargarRutasUsuarios($router) {
     cargarRutasPersonal($router);
 
     $router->get('/pizzeria', function() {
-        echo "Bienvenido al sitio de la Pizzería!";
+        require_once __DIR__ . '/../src/views/cliente/home.php';
     });
-    $router->get('/Pizzeria/login', [$auth, 'showLogin']);
-    $router->post('/Pizzeria/login', [$auth, 'processLogin']);
-    $router->get('/Pizzeria/register', [$auth, 'showRegister']);
-    $router->post('/Pizzeria/register', [$auth, 'processRegister']);
-    $router->get('/Pizzeria/logout', [$auth, 'logout']);
+    $router->get('/pizzeria/login', [$auth, 'showLogin']);
+    $router->post('/pizzeria/login', [$auth, 'processLogin']);
+    $router->get('/pizzeria/register', [$auth, 'showRegister']);
+    $router->post('/pizzeria/register', [$auth, 'processRegister']);
+    $router->get('/pizzeria/logout', [$auth, 'logout']);
 
     cargarRutasCliente($router);
 }
-?>
